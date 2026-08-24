@@ -99,7 +99,7 @@ function change(img) {
 let Trendsongs;
 const TrendContainer = document.getElementById("Trending-music-container");
 
-fetch("http://localhost:5000/api/Trendsongs")
+fetch("https://swar-hbde.onrender.com/api/Trendsongs")
   .then(res => res.json())
   .then(Trendsongss => {
     Trendsongs=Trendsongss;
@@ -144,7 +144,7 @@ function repeatsong(img) {
 let songs;
 const container = document.getElementById("music-container");
 
-fetch("http://localhost:5000/api/songs")
+fetch("https://swar-hbde.onrender.com/api/songs")
   .then(res => res.json())
   .then(songss => {
     songs=songss;

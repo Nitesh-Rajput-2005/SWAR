@@ -230,7 +230,7 @@
                 try {
 
                     const res = await fetch(
-                        "http://localhost:5000/api/auth/verify-otp",
+                        "https://swar-hbde.onrender.com/api/auth/verify-otp",
                         {
                             method: "POST",
 
@@ -306,7 +306,7 @@
                     resendBtn.textContent = "Sending...";
 
                     const res = await fetch(
-                        "http://localhost:5000/api/auth/resend-otp",
+                        "https://swar-hbde.onrender.com/api/auth/resend-otp",
                         {
                             method: "POST",
 
