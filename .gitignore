@@ -1,0 +1,11 @@
+node_modules/
+Backend/node_modules/
+
+.env
+Backend/.env
+
+*.log
+
+.vscode/
+
+public/songs/

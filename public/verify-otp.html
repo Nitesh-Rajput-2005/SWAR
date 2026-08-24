@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Verify Email</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #00101f, #001a33 45%, #01274a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .auth-card {
+            width: 380px;
+            background: #082b4f;
+            border-radius: 18px;
+            padding: 32px 28px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #b7c7d9;
+            font-size: 14px;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #dce8f5;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            outline: none;
+            background: #031a33;
+            color: white;
+            font-size: 20px;
+            letter-spacing: 8px;
+            text-align: center;
+        }
+
+        .field input:focus {
+            border-color: #5aa8ff;
+            box-shadow: 0 0 0 3px rgba(90, 168, 255, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 999px;
+            padding: 13px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            background: #f0f4f7;
+            color: #001a33;
+            transition: 0.25s ease;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            background: #dfeaf5;
+        }
+
+        #message {
+            margin-top: 14px;
+            text-align: center;
+            font-size: 14px;
+            min-height: 18px;
+        }
+
+        .email-display {
+            text-align: center;
+            color: #79b7ff;
+            margin-bottom: 20px;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .back-link a {
+            color: #9cc8ff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .resend-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .resend-section p {
+            color: #b7c7d9;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .resend-btn {
+            border: none;
+            background: transparent;
+            color: #79b7ff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .resend-btn:hover {
+            text-decoration: underline;
+        }
+
+        .resend-btn:disabled {
+            color: #71869b;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-card">
+
+        <div class="title">Verify Email</div>
+
+        <div class="subtitle">
+            Enter the 6-digit OTP sent to your email
+        </div>
+
+        <div id="emailDisplay" class="email-display"></div>
+
+        <form id="verifyForm">
+
+            <div class="field">
+                <label for="otp">OTP</label>
+
+                <input type="text" id="otp" maxlength="6" inputmode="numeric" placeholder="000000" required />
+
+            </div>
+
+            <button class="submit-btn" type="submit">
+                Verify OTP
+            </button>
+
+        </form>
+
+        <div class="resend-section">
+
+            <p>Didn't receive the OTP?</p>
+
+            <button type="button" id="resendBtn" class="resend-btn">
+                Resend OTP
+            </button>
+
+        </div>
+
+        <div id="message"></div>
+
+        <div class="back-link">
+            <a href="signup.html">← Back to Sign up</a>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const email = localStorage.getItem("pendingEmail");
+
+        const emailDisplay = document.getElementById("emailDisplay");
+
+        if (email) {
+            emailDisplay.textContent = email;
+        } else {
+            emailDisplay.textContent = "No email found";
+        }
+
+
+        document
+            .getElementById("verifyForm")
+            .addEventListener("submit", async (e) => {
+
+                e.preventDefault();
+
+                const message = document.getElementById("message");
+
+                message.textContent = "";
+
+                const otp = document.getElementById("otp").value;
+
+
+                try {
+
+                    const res = await fetch(
+                        "http://localhost:5000/api/auth/verify-otp",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email: email,
+                                otp: otp
+                            })
+                        }
+                    );
+
+
+                    const result = await res.json();
+
+
+                    if (res.ok) {
+
+                        message.style.color = "#bfffcf";
+
+                        message.textContent =
+                            result.message || "Email verified successfully";
+
+
+                        localStorage.removeItem("pendingEmail");
+
+
+                        setTimeout(() => {
+                            window.location.href = "login.html";
+                        }, 1000);
+
+                    } else {
+
+                        message.style.color = "#ffbdbd";
+
+                        message.textContent =
+                            result.message || "Invalid OTP";
+
+                    }
+
+                } catch (err) {
+
+                    console.log(err);
+
+                    message.style.color = "#ffbdbd";
+
+                    message.textContent = "Server error";
+
+                }
+
+            });
+
+        document
+            .getElementById("resendBtn")
+            .addEventListener("click", async () => {
+
+                const resendBtn = document.getElementById("resendBtn");
+                const message = document.getElementById("message");
+
+                message.textContent = "";
+
+                if (!email) {
+                    message.style.color = "#ffbdbd";
+                    message.textContent = "Email not found. Please sign up again.";
+                    return;
+                }
+
+                try {
+
+                    resendBtn.disabled = true;
+                    resendBtn.textContent = "Sending...";
+
+                    const res = await fetch(
+                        "http://localhost:5000/api/auth/resend-otp",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email: email
+                            })
+                        }
+                    );
+
+                    const result = await res.json();
+
+                    if (res.ok) {
+
+                        message.style.color = "#bfffcf";
+
+                        message.textContent =
+                            result.message || "New OTP sent";
+
+                        startResendCooldown();
+
+                    } else {
+
+                        message.style.color = "#ffbdbd";
+
+                        message.textContent =
+                            result.message || "Could not resend OTP";
+
+                        resendBtn.disabled = false;
+                        resendBtn.textContent = "Resend OTP";
+                    }
+
+                } catch (err) {
+
+                    console.log(err);
+
+                    message.style.color = "#ffbdbd";
+
+                    message.textContent = "Server error";
+
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = "Resend OTP";
+                }
+
+            });
+
+        function startResendCooldown() {
+
+            const resendBtn =
+                document.getElementById("resendBtn");
+
+            let seconds = 60;
+
+            resendBtn.disabled = true;
+
+            resendBtn.textContent =
+                `Resend OTP in ${seconds}s`;
+
+            const timer = setInterval(() => {
+
+                seconds--;
+
+                resendBtn.textContent =
+                    `Resend OTP in ${seconds}s`;
+
+                if (seconds <= 0) {
+
+                    clearInterval(timer);
+
+                    resendBtn.disabled = false;
+
+                    resendBtn.textContent = "Resend OTP";
+                }
+
+            }, 1000);
+        } 
+
+    </script>
+
+</body>
+
+</html>

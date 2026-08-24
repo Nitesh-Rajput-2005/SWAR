@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #00101f, #001a33 45%, #01274a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .auth-card {
+      width: 380px;
+      background: #082b4f;
+      border-radius: 18px;
+      padding: 32px 28px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #b7c7d9;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #dce8f5;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      outline: none;
+      background: #031a33;
+      color: white;
+      font-size: 15px;
+    }
+
+    .field input::placeholder {
+      color: #8ea6bf;
+    }
+
+    .field input:focus {
+      border-color: #5aa8ff;
+      box-shadow: 0 0 0 3px rgba(90, 168, 255, 0.15);
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 13px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #f0f4f7;
+      color: #001a33;
+      transition: 0.25s ease;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      background: #dfeaf5;
+    }
+
+    .bottom-text {
+      text-align: center;
+      margin-top: 20px;
+      color: #c2d3e3;
+      font-size: 14px;
+    }
+
+    .bottom-text a {
+      color: #79b7ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .home-link {
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .home-link a {
+      color: #9cc8ff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    #message {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 14px;
+      color: #ffbdbd;
+      min-height: 18px;
+    }
+  </style>
+</head>
+<body >
+  <div class="auth-card">
+    <div class="title">Log in</div>
+    <div class="subtitle">Welcome back to your music world</div>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required 
+         /> <div style="bottom: 36px;left:90%;position:  relative;pointer-events: none;">
+            👁
+         </div>
+      </div>
+
+      <button class="submit-btn" type="submit">Log in</button>
+    </form>
+
+    <div id="message"></div>
+
+    <div class="bottom-text">
+      Don’t have an account? <a href="signup.html">Sign up</a>
+    </div>
+
+    <div class="home-link">
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </div>
+
+  <!-- <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const message = document.getElementById("message");
+      message.textContent = "";
+
+      const data = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+      };
+
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("token", result.token);
+          if (result.user) {
+            localStorage.setItem("user", JSON.stringify(result.user));
+          }
+          window.location.href = "home.html";
+        } else {
+          message.textContent = result.message || "Login failed";
+        }
+      } catch (err) {
+        message.textContent = "Server error";
+      }
+    });
+  </script> -->
+  <script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const message = document.getElementById("message");
+  message.textContent = "";
+
+  const data = {
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value
+  };
+
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      // save token
+      localStorage.setItem("token", result.jwttoken);
+
+      message.style.color = "#bfffcf";
+      message.textContent = result.message;
+
+      // redirect after login
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1000);
+
+    } else {
+      message.style.color = "#ffbdbd";
+      message.textContent = result.message;
+    }
+
+  } catch (err) {
+    message.style.color = "#ffbdbd";
+    message.textContent = "Server error";
+    console.log(err);
+  }
+});
+</script>
+</body>
+</html>

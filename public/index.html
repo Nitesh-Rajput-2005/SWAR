@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAR-MANCH</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="utility.css">
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif">
+    <div class="container" style="width:100% ;height: 100%;display: grid;grid-template-rows: 7% minmax(0, 93%);">
+        <div class="homeup border"
+            style="font-weight: 600;justify-items: center; align-items: center; width: 100%; display: grid;grid-template-columns: 5% minmax(0,1fr)  25%;">
+            <div class="border "><img class="img invert" style="width: 40px;height: 40px;"
+                    src="https://www.svgrepo.com/show/268655/music-player-song.svg" alt=""></div>
+
+            <div class="flex justify-center item-center" style="width: clamp(300px, 70%, 700px);">
+                <div onclick="home(this)" class="border bg-grey cursor justify-center item-center flex "
+                    style="border-radius: 45px;height: 45px;width:50px;">
+                    <img class="img invert" src="svg/home.svg" alt="">
+                </div>
+                <div class="border  bg-grey item-center"
+                    style="width: clamp(300px, 100%, 700px); border-radius: 50px;height: 40px; display: grid;grid-template-columns: 40px minmax(0,1fr);position: relative; ">
+                    <img class="img invert" src="svg/search.svg" alt="">
+                    <div style="width: 100%;">
+                        <input id="search-input" type="text" placeholder="Search songs or artists">
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- <div class=" cursor" style="font-size: 25px;margin-top: 6px;">|</div> -->
+            <!-- <div class=" flex cursor" style="width: 120px;">
+                    <img style="width: 20px; margin-bottom: 16px;margin-right: 12px;" class="invert " src="install.svg"
+                        alt="">
+                    Install App
+                </div> -->
+
+            <div class="flex  item-center " style="justify-content: end;width: 96%;">
+                <div onclick="gosignup()" class=" cursor" style="width: 80px;">Sign up</div>
+                <div class="border cursor flex item-center justify-center" onclick="gologin()"
+                    style="  border-radius: 18px;background-color: azure;color: black; width: 80px;height: 40px;"> Log
+                    in</div>
+            </div>
+        </div>
+        <div class="down ">
+            <div class="libraryleft thirdcolor border">
+                <header class="border flex" style="width: 90%; padding: 10px ; ">
+                    <div class="flex" style="width: 100%;">
+                        <div style="width: 70%;margin-right: 10px;padding: 10px;font-weight: 600;">Your Library</div>
+                    </div>
+                </header>
+                <div class=" border" style=" width: 100%;">
+                    <div class="bg-grey border "
+                        style="height: 100%;width: 90%; margin-bottom: 20px; margin-top: 10px;margin-left: 10px;padding: 5px;">
+                        <div style="height: 93%;width: 100%;">
+                            <div>All Songs</div>
+                            <div id="music-container" class="thirdcolor"
+                                style="height: 100%; width: 100%;margin-top: 5px;display:flex;flex-direction: column;padding: 5px;border-radius: 10px;overflow-y: auto;row-gap: 10px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class=" border foot" style="margin-top: 50px;">
+                    <div class="di">Legal</div>
+                    <div class="di">Saftey & Privacy Center</div>
+                    <div class="di">Privacy Policy</div>
+                    <!-- <div class="di">Cookies</div>
+                    <div class="di">About Ads</div>
+                    <div class="di">Accessibility</div> -->
+                    <div style="padding: 15px;padding-top: 5px;font-size: 13px;">Cookies</div>
+                    <div class="flex cursor justify-center item-center thirdcolor" style=" border: 1px solid rgb(244, 239, 239); border-radius: 50px;font-size: 14px;width: 97px;padding-top: 3px;
+                    margin-left: 15px;margin-top: 12px;font-weight: 600;
+                    ">
+                        <img style="width: 25px;margin-left: -2px;margin-top: -2px;padding-right: 11px;padding-bottom: 3px;padding-top: 3px;"
+                            class="invert" src="svg/global.svg" alt="">
+                        English
+                    </div>
+                </footer>
+            </div>
+            <div class="right border thirdcolor " style="padding-left: 34px;padding-top: 45px;min-height: 0;">
+                <div class="rightgrid"
+                    style="display: grid;grid-template-rows: 70px minmax(0,1fr) ;height: 100%;width: 100%;min-height: 0;">
+                    <div style="font-size: 29px;font-weight: 800;padding-bottom: 30px; ">
+                        Trending Songs
+                    </div>
+                    <div id="Trending-music-container"
+                        style="display: flex;flex-wrap: wrap; row-gap: 10px;column-gap: 20px;overflow-y: auto;min-height: 0;align-items: flex-start;align-content: flex-start;">
+                    </div>
+
+                    <div class="music"
+                        style="min-height: 0;grid-template-rows: 1fr minmax(0,1fr);justify-items: center; ">
+                        <div style="width: 100%;height: 100%; position: relative;">
+                            <div class="time cursor"></div>
+                            <div class=" time lapse"
+                                style="width:0 ;background-color: rgb(111, 160, 234); pointer-events: none;">
+                            </div>
+                            <div class="point">
+                            </div>
+
+                        </div>
+
+                        <div
+                            style="display: grid;grid-template-columns: minmax(0,30%) minmax(0,40%) minmax(0,30%);min-height: 0;min-width: 0;width: 95%;height: 100%;">
+
+                            <div style="display: flex;column-gap: 10px;align-items: center;width: 100%;height: 100%;">
+                                <div class="timespan"></div>
+                                <img class="cursor repeat invert" onclick="repeatsong(this)"
+                                    style="width: 19px; height: 18px;"
+                                    src="https://www.svgrepo.com/show/478675/shuffle-3.svg" alt="">
+
+
+                            </div>
+
+
+                            <div class="flex"
+                                style="column-gap: 9px;justify-content: center;align-items: center;width: 100%;height: 100%;min-height: 0;">
+                                <img onclick="backward(this)" class="music-icon invert back cursor"
+                                    src="https://www.svgrepo.com/show/327479/play-skip-back.svg" alt="">
+                                <img onclick="change(this)" class="music-icon invert allplay cursor"
+                                    src="https://www.svgrepo.com/show/522226/play.svg" alt="">
+                                <img onclick="forward(this)" class="music-icon invert forward cursor"
+                                    src="https://www.svgrepo.com/show/327481/play-skip-forward.svg" alt="">
+                            </div>
+
+                            <div
+                                style="width: 100%;height: 100%;justify-content: end;align-items: center;position: relative;display: flex;">
+                                <div class=" volume-bar cursor"></div>
+                                <div style="background-color: rgb(111, 160, 234); pointer-events: none;;"
+                                    class=" volume-fill">
+                                </div>
+                                <div class="volumepoint"></div>
+                                <img onclick="silentornot(this)" class="volumeicon invert cursor"
+                                    src="https://www.svgrepo.com/show/535722/volume-high.svg" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

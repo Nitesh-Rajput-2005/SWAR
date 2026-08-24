@@ -1,0 +1,431 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     min-height: 0;
+     min-width: 0;
+ }
+
+ body {
+     background: linear-gradient(135deg, #021222 35%, #1b7cdc 80%, #030a11 100%);
+     color: white;
+     width: 100vw;
+     height: 100vh;
+     overflow: hidden;
+ }
+
+ .thirdcolor {
+     background: linear-gradient(135deg, #082d51 25%, #021223 70%, #04192e 100%);
+
+
+ }
+
+ .bg-grey {
+     background: linear-gradient(135deg, #03366c 30%, #1061b1 60%, #040f19 100%);
+     color: white;
+ }
+
+ .homeup {
+     width: 100%;
+ }
+
+ .down {
+     width: 100%;
+     display: grid;
+     grid-template-columns: 30% 70%;
+ }
+
+ .right {
+     height: 100%;
+     min-height: 0;
+ }
+
+ .libraryleft {
+     display: grid;
+     grid-template-rows: 5% minmax(0, 1fr) 25%;
+     height: 100%;
+ }
+
+ .img {
+     margin: 5px;
+     width: 30px;
+ }
+
+ .invert {
+     filter: invert(1);
+ }
+
+ .title {
+     display: inline-block;
+     margin: 20px;
+     margin-bottom: 0;
+     font-size: 15px;
+     font-weight: 800;
+ }
+
+ .subtitle {
+     display: inline-block;
+     margin: 20px;
+     margin-top: 0;
+     margin-bottom: 0;
+     font-size: 14px;
+     font-weight: 600;
+
+
+ }
+
+ .btn {
+     display: inline-block;
+     margin: 20px;
+     margin-top: 0;
+     font-size: 12px;
+     font-weight: 800;
+     border-radius: 50px;
+     background-color: aliceblue;
+     color: rgb(104, 134, 156);
+     width: 118px;
+ }
+
+ .foot .di {
+     margin-left: 10px;
+     display: inline-block;
+     padding: 5px;
+     padding-bottom: 14px;
+     font-size: 12px;
+     font-weight: 100;
+     color: rgb(138, 152, 156);
+ }
+
+ .play-icon {
+     width: 50px;
+     height: 50px;
+     border-radius: 50px;
+     background-color: rgb(53, 158, 211);
+     position: absolute;
+     top: 170px;
+     right: 29px;
+     opacity: 0;
+     cursor: pointer;
+     transition: top 0.5s, opacity 0.5s, width 1ms, height 1ms, border-radius 1ms, background-color 1ms;
+ }
+
+ .play-icon:hover {
+     width: 52px;
+     height: 52px;
+     border-radius: 52px;
+     background-color: rgb(53, 158, 211);
+     top: 133px;
+     right: 28px;
+
+     .play-svg {
+         width: 38px;
+         padding-left: 14.56px;
+         padding-top: 14.56px;
+     }
+ }
+
+ .play-svg {
+     width: 38px;
+     padding-left: 14px;
+     padding-top: 14px;
+
+ }
+
+ /* .card {
+    width: 180px;
+    padding: 10px;
+    display: inline-block;
+    transition: all 0.3s;
+    background: rgba(0, 0, 0, 0.2);
+    height: 240px;
+} */
+
+ .card {
+     min-width: 160px;
+     max-width: 220px;
+     width: 45%;
+     aspect-ratio: 3/4;
+     padding: 10px;
+     display: inline-block;
+     transition: all 0.3s;
+     background: rgba(0, 0, 0, 0.2);
+ }
+
+ @media (min-width:1494px) {
+     .card {
+         width: 17.7%;
+     }
+ }
+
+ @media (min-width:1114px) and (max-width:1493px) {
+     .card {
+         width: 22%;
+     }
+ }
+
+ @media (min-width:966px) and (max-width:1113px) {
+     .card {
+         width: 30%;
+     }
+ }
+
+ @media(max-width:966px) {
+     .down {
+         grid-template-columns: 38% 62%;
+     }
+
+     .card {
+         max-width: 245px;
+     }
+ }
+
+ @media (max-width: 700px) {
+
+    .playlist-header h2 {
+        font-size: 22px;
+    }
+
+    .playlist-header p {
+        font-size: 14px;
+    }
+
+    .add-playlist-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 23px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .playlist-header {
+        padding: 8px;
+        gap: 6px;
+    }
+
+    .playlist-header h2 {
+        font-size: 20px;
+    }
+
+    .playlist-header p {
+        font-size: 12px;
+    }
+
+    .add-playlist-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 21px;
+    }
+
+}
+
+ .card:hover {
+     background: linear-gradient(135deg, #031b34 0%, #2161a0 50%, #041a2f 100%);
+
+     .play-icon {
+         opacity: 1;
+         top: 134px;
+     }
+
+ }
+
+ .music-card {
+     width: 100%;
+     height: 60px;
+     display: grid;
+     grid-template-columns: 50px minmax(0, 1fr) 20px 20px;
+     align-items: center;
+     gap: 10px;
+     padding: 5px;
+     border-radius: 10px;
+     background: rgba(0, 0, 0, 0.2);
+     min-height: auto;
+
+ }
+
+ .music-card:hover {
+     background: linear-gradient(135deg, #031b34 0%, #2161a0 50%, #041a2f 100%);
+ }
+
+
+ .music1 {
+     display: none;
+ }
+
+ /* .hidden {
+     display: none;
+ } */
+
+ /* .music {
+     background: linear-gradient(135deg, #071727 25%, #123960 70%, #04192e 100%);
+     ;
+     width: 96%;
+     flex-wrap: wrap;
+     height: 68px;
+     margin-top: 20px;
+     margin-bottom: 10px;
+     border-radius: 50px;
+     justify-content: center;
+
+ } */
+
+ .music {
+     background: linear-gradient(135deg, #071727 25%, #123960 70%, #04192e 100%);
+     ;
+     width: 96%;
+     height: 68px;
+     margin-top: 20px;
+     margin-bottom: 10px;
+     border-radius: 50px;
+     display: none;
+
+ }
+
+ .point {
+     position: absolute;
+     left: calc(2.5% - 6px);
+     width: 12px;
+     height: 12px;
+     border-radius: 12px;
+     background-color: white;
+     top: 17px;
+ }
+
+ .time {
+     background-color: white;
+     width: 95%;
+     height: 5px;
+     border-radius: 50px;
+     /* margin-top: 20px; */
+     /* display: block; */
+     /* margin-left: 11px; */
+     position: absolute;
+     left: 2.5%;
+     top: 20px;
+ }
+
+ .music-icon {
+     width: 25px;
+     height: 15px;
+     margin: 0;
+
+
+ }
+
+ /* .volume-fill {
+     position: absolute;
+     width: 80px;
+     height: 5px;
+     border-radius: 40px;
+     display: block;
+     left: auto;
+     right: 4%;
+     top: 40px;
+ }
+
+ .volume-bar {
+     position: absolute;
+     background-color: white;
+     width: 80px;
+     height: 5px;
+     border-radius: 40px;
+     display: block;
+     left: auto;
+     right: 4%;
+     top: 40px;
+ }
+
+ .volumepoint {
+     position: absolute;
+     top: 36px;
+     left: auto;
+     right: 4%;
+     width: 12px;
+     height: 12px;
+     border-radius: 12px;
+     background-color: white;
+     pointer-events: none;
+
+ }
+
+ .volumeicon {
+     width: 17px;
+     height: 17px;
+     position: absolute;
+     left: auto;
+     right: calc(4% + 88px);
+     top: 35px;
+ } */
+
+ .volume-fill {
+     position: absolute;
+     width: min(80%, 80px);
+     height: 5px;
+     border-radius: 40px;
+     right: 5px;
+
+     /* right: 4%; */
+     /* top: 40px; */
+ }
+
+ .volume-bar {
+     position: absolute;
+     background-color: white;
+     right: 5px;
+     width: min(80%, 80px);
+     height: 5px;
+     border-radius: 40px;
+
+
+
+ }
+
+ .volumepoint {
+     position: absolute;
+
+
+     right: 5px;
+     left: auto;
+     width: 12px;
+     height: 12px;
+     border-radius: 12px;
+     background-color: white;
+     pointer-events: none;
+
+ }
+
+ .volumeicon {
+     width: 17px;
+     height: 17px;
+     position: absolute;
+     right: min(95px, 92%);
+     /* left: auto;
+     right: calc(4% + 88px);
+     top: 35px; */
+ }
+
+ /* .repeat {
+     /* position: absolute; */
+ /* left: 110px;
+     top: 35px;
+ } */
+
+ ::-webkit-scrollbar {
+     width: 8px;
+     height: 8px;
+ }
+
+ ::-webkit-scrollbar-track {
+     background: rgba(0, 0, 0, 0.2);
+     border-radius: 10px;
+ }
+
+ ::-webkit-scrollbar-thumb {
+     background: rgba(255, 255, 255, 0.3);
+     border-radius: 10px;
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+     background: rgba(255, 255, 255, 0.5);
+ }
