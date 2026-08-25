@@ -6,7 +6,7 @@ import sendOTP from "../utils/sendOTP.js";
 const signup = async (req, res) => {
   try {
 
-    console.log("🔥 SIGNUP ROUTE HIT");
+   
 
     const { name, email, password } = req.body;
 
