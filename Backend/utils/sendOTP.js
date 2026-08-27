@@ -49,7 +49,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const sendOTP = async (email, otp) => {
 
     const { data, error } = await resend.emails.send({
-        from: "SWAR <onboarding@resend.dev>",
+        from: "SWAR <noreply@mail.swar.aryansheoran.dev>",
         to: [email],
         subject: "SWAR - Email Verification OTP",
 
