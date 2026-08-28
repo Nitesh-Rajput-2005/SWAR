@@ -108,7 +108,7 @@ fetch("https://swar-hbde.onrender.com/api/Trendsongs")
             card.className = "card border";
 
             card.innerHTML = `
-    <audio  data-index="${index}" data-type="trend" class="music1" src="songs/${song.audio}"></audio>
+    <audio  data-index="${index}" data-type="trend" class="music1" src="${song.audio}"></audio>
     <div style="width:100%;height:70%;position:relative;">
       <img style="width:99%;height:99%;" src="${song.image}">
       <div onclick="changeIcon(this)" class="play-icon">
@@ -187,7 +187,7 @@ fetch("https://swar-hbde.onrender.com/api/songs")
         data-index="${index}"
         data-type="simple"
         class="music1"
-        src="songs/${song.audio}">
+        src="${song.audio}">
     </audio>
 
     <!-- Song information -->
@@ -1088,7 +1088,7 @@ function openPlaylistSongs(playlist) {
                 data-index="${index}"
                 data-type="playlist"
                 class="music1"
-                src="songs/${song.audio}">
+                src="${song.audio}">
             </audio>
 
             <div
