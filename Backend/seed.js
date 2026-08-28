@@ -1,7 +1,8 @@
 
 import {Song,TrendSong} from "./models/song.js";
 import mongoose from "mongoose";
-// const Songs = [
+import "./db.js";
+const Songs = [
 //  {
 //         title: 'Thalapathy Kacheri',
 //         artist: 'Anirudh Ravichander, Thalapathy Vijay, Arivu',
@@ -99,11 +100,18 @@ import mongoose from "mongoose";
 //         audio: 'thodi si.mp3',
 //         image: 'https://i.scdn.co/image/ab67616d00001e02eb0516ec1c97c3cc97f4cb61'
 //     },
-// ];
 
-//   await TrendSong.insertMany(Songs);
+{
+    title: "Moment of Peace",
+    artist: "MickeysCat",
+    audio: "https://res.cloudinary.com/cxaan02k/video/upload/v1787938190/mickeyscat-moment-of-peace-mickeyscat-554494.mp3",
+    image: "...",
+}
+];
 
-const users=[
+  await Song.insertMany(Songs);
 
-]
+// const users=[
+
+// ]
  mongoose.connection.close();
