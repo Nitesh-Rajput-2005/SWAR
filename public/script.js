@@ -3,13 +3,13 @@ let currentaudio = null;
 
 function changeImage(img) {
     let music = document.querySelector(".music");
-    music.style.display="grid";
+    music.style.display = "grid";
     let rightgrid = document.querySelector(".rightgrid");
-    rightgrid.style.gridtemplaterows="70px minmax(0,1fr) 100px";
+    rightgrid.style.gridtemplaterows = "70px minmax(0,1fr) 100px";
     let card = img.closest(".music-card");
     let audio = card.querySelector(".music1");
     currentaudio = audio;
-    currentaudio.volume=currentVolume;
+    currentaudio.volume = currentVolume;
     attachProgress(currentaudio);
 
     if ((img.src.includes("ause.svg"))) {
@@ -39,15 +39,15 @@ function changeImage(img) {
 function changeIcon(icon) {
 
     let music = document.querySelector(".music");
-    music.style.display="grid";
+    music.style.display = "grid";
     let rightgrid = document.querySelector(".rightgrid");
-    rightgrid.style.gridtemplaterows="70px minmax(0,1fr) 100px";
+    rightgrid.style.gridtemplaterows = "70px minmax(0,1fr) 100px";
 
     let card = icon.closest(".card");
     let audio = card.querySelector(".music1");
     let img = icon.querySelector(".play-svg")
     currentaudio = audio;
-    currentaudio.volume=currentVolume;
+    currentaudio.volume = currentVolume;
     attachProgress(currentaudio);
 
     if ((img.src.includes("svg/pause.svg"))) {
@@ -99,15 +99,21 @@ function change(img) {
 let Trendsongs;
 const TrendContainer = document.getElementById("Trending-music-container");
 
-fetch("https://swar-hbde.onrender.com/api/Trendsongs")
-  .then(res => res.json())
-  .then(Trendsongss => {
-    Trendsongs=Trendsongss;
-Trendsongss.forEach((song, index) => {
-    const card = document.createElement("div");
-    card.className = "card border";
+showTrendingSkeletons();
 
-    card.innerHTML = `
+fetch("https://swar-hbde.onrender.com/api/Trendsongs")
+    .then(res => res.json())
+    .then(Trendsongss => {
+        Trendsongs = Trendsongss;
+
+        // Remove skeletons
+        TrendContainer.innerHTML = "";
+
+        Trendsongss.forEach((song, index) => {
+            const card = document.createElement("div");
+            card.className = "card border";
+
+            card.innerHTML = `
     <audio  data-index="${index}" data-type="trend" class="music1" src="${song.audio}"></audio>
     <div style="width:100%;height:70%;position:relative;">
       <img style="width:99%;height:99%;" src="${song.image}">
@@ -123,8 +129,9 @@ Trendsongss.forEach((song, index) => {
     </div>
   `;
 
-    TrendContainer.appendChild(card);
-});});
+            TrendContainer.appendChild(card);
+        });
+    });
 
 let repeat = 0;
 
@@ -144,14 +151,20 @@ function repeatsong(img) {
 let songs;
 const container = document.getElementById("music-container");
 
+showMusicSkeletons();
+
 fetch("https://swar-hbde.onrender.com/api/songs")
-  .then(res => res.json())
-  .then(songss => {
-    songs=songss;
-songss.forEach((song, index) => {
-    const card = document.createElement("div");
-    card.className = "music-card ";
-    card.innerHTML = ` 
+    .then(res => res.json())
+    .then(songss => {
+        songs = songss;
+
+        // Remove skeletons
+        container.innerHTML = "";
+
+        songss.forEach((song, index) => {
+            const card = document.createElement("div");
+            card.className = "music-card ";
+            card.innerHTML = ` 
 
 
     <img style="width:50px;height:50px;border-radius: 10px;"
@@ -170,37 +183,37 @@ songss.forEach((song, index) => {
                             
     
    `;
-       container.appendChild(card);
-});
-  });
+            container.appendChild(card);
+        });
+    });
 
 
-    setInterval(() => {
-        if (!currentaudio) return;
+setInterval(() => {
+    if (!currentaudio) return;
 
-        let timespan = document.querySelector(".timespan");
-        timespan.innerHTML = `
+    let timespan = document.querySelector(".timespan");
+    timespan.innerHTML = `
         <span>${formatTime(currentaudio.currentTime)}</span> /
         <span>${formatTime(currentaudio.duration)}</span>
     `;
 
-        if ((currentaudio.currentTime == currentaudio.duration) && (!repeat)) {
-            forward(this);
-        }
-        else if ((currentaudio.currentTime == currentaudio.duration) && (repeat)) {
-            currentaudio.currentTime = 0;
-            currentaudio.play();
-
-        }
-
-    }, 500);
-
-    function formatTime(seconds) {
-        if (isNaN(seconds)) return "0:00";
-        let m = Math.floor(seconds / 60);
-        let s = Math.floor(seconds % 60);
-        return `${m}:${s < 10 ? "0" : ""}${s}`;
+    if ((currentaudio.currentTime == currentaudio.duration) && (!repeat)) {
+        forward(this);
     }
+    else if ((currentaudio.currentTime == currentaudio.duration) && (repeat)) {
+        currentaudio.currentTime = 0;
+        currentaudio.play();
+
+    }
+
+}, 500);
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "0:00";
+    let m = Math.floor(seconds / 60);
+    let s = Math.floor(seconds % 60);
+    return `${m}:${s < 10 ? "0" : ""}${s}`;
+}
 
 
 
@@ -255,7 +268,7 @@ function forward(forward) {
     currentaudio = nextAudio;
     attachProgress(currentaudio);
     currentaudio.play();
-    currentaudio.volume=currentVolume;
+    currentaudio.volume = currentVolume;
     const img = document.querySelector(".allplay");
     img.src = "https://www.svgrepo.com/show/535553/pause.svg";
     document.querySelectorAll(".play-svg").forEach(icon => {
@@ -300,7 +313,7 @@ function backward(backward) {
     currentaudio = nextAudio;
     attachProgress(currentaudio);
     currentaudio.play();
-    currentaudio.volume=currentVolume;
+    currentaudio.volume = currentVolume;
     const img = document.querySelector(".allplay");
     img.src = "https://www.svgrepo.com/show/535553/pause.svg";
     document.querySelectorAll(".play-svg").forEach(icon => {
@@ -382,9 +395,9 @@ const volumePoint = document.querySelector(".volumepoint");
 let currentVolume = 1;
 
 function setVolume(percent) {
-    if(percent!=0)
-    document.querySelector(".volumeicon").src = "https://www.svgrepo.com/show/535722/volume-high.svg";
-    percent = Math.max(0, Math.min(1, percent)); 
+    if (percent != 0)
+        document.querySelector(".volumeicon").src = "https://www.svgrepo.com/show/535722/volume-high.svg";
+    percent = Math.max(0, Math.min(1, percent));
     currentVolume = percent;
 
     if (currentaudio) {
@@ -392,16 +405,16 @@ function setVolume(percent) {
     }
 
     const barWidth = volumeBar.offsetWidth;
-    
 
-   
+
+
 
     volumeFill.style.width = percent * barWidth + "px";
-    volumeFill.style.right= (1-percent)*barWidth + 5 + "px";
-    
+    volumeFill.style.right = (1 - percent) * barWidth + 5 + "px";
+
 
     volumePoint.style.right =
-        5 +(1-percent)*barWidth - volumePoint.offsetWidth / 2 + "px";
+        5 + (1 - percent) * barWidth - volumePoint.offsetWidth / 2 + "px";
 }
 
 
@@ -414,13 +427,68 @@ volumeBar.addEventListener("click", (e) => {
     setVolume(percent);
 });
 
-function gosignup()
-{
-    window.location.href="signup.html";
+function gosignup() {
+    window.location.href = "signup.html";
 }
 
-function gologin()
-{
-    window.location.href="login.html";
+function gologin() {
+    window.location.href = "login.html";
 }
 
+
+// =========================
+// SKELETON LOADING
+// =========================
+
+function showTrendingSkeletons() {
+
+    TrendContainer.innerHTML = "";
+
+    for (let i = 0; i < 6; i++) {
+
+        const skeleton = document.createElement("div");
+
+        skeleton.className = "card border skeleton-card";
+
+        skeleton.innerHTML = `
+            <div style="width:100%;height:70%;position:relative;">
+                <div class="skeleton-box skeleton-trend-image"></div>
+            </div>
+
+            <div>
+                <div class="skeleton-box skeleton-title"></div>
+                <div class="skeleton-box skeleton-artist"></div>
+            </div>
+        `;
+
+        TrendContainer.appendChild(skeleton);
+    }
+}
+
+
+function showMusicSkeletons() {
+
+    container.innerHTML = "";
+
+    for (let i = 0; i < 5; i++) {
+
+        const skeleton = document.createElement("div");
+
+        skeleton.className = "music-card skeleton-card";
+
+        skeleton.innerHTML = `
+            <div class="skeleton-box skeleton-music-image"></div>
+
+            <div>
+                <div class="skeleton-box skeleton-music-title"></div>
+                <div class="skeleton-box skeleton-music-artist"></div>
+            </div>
+
+            <div class="skeleton-box"
+                 style="width:20px;height:20px;border-radius:50%;">
+            </div>
+        `;
+
+        container.appendChild(skeleton);
+    }
+}

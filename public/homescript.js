@@ -99,10 +99,16 @@ function change(img) {
 let Trendsongs;
 const TrendContainer = document.getElementById("Trending-music-container");
 
+showTrendingSkeletons();
+
 fetch("https://swar-hbde.onrender.com/api/Trendsongs")
     .then(res => res.json())
     .then(Trendsongss => {
         Trendsongs = Trendsongss;
+
+        // Remove skeletons
+        TrendContainer.innerHTML = "";
+
         Trendsongss.forEach((song, index) => {
             const card = document.createElement("div");
             card.className = "card border";
@@ -145,11 +151,15 @@ function repeatsong(img) {
 let songs;
 const container = document.getElementById("music-container");
 
+showMusicSkeletons();
+
 fetch("https://swar-hbde.onrender.com/api/songs")
     .then(res => res.json())
     .then(songss => {
         songs = songss;
 
+        // Remove skeletons
+        container.innerHTML = "";
         songss.forEach((song, index) => {
             const card = document.createElement("div");
             card.className = "music-card ";
@@ -2275,5 +2285,62 @@ playlistSongList.addEventListener("scroll", function () {
 
 });
 
+
+// =========================
+// SKELETON LOADING
+// =========================
+
+function showTrendingSkeletons() {
+
+    TrendContainer.innerHTML = "";
+
+    for (let i = 0; i < 6; i++) {
+
+        const skeleton = document.createElement("div");
+
+        skeleton.className = "card border skeleton-card";
+
+        skeleton.innerHTML = `
+            <div style="width:100%;height:70%;position:relative;">
+                <div class="skeleton-box skeleton-trend-image"></div>
+            </div>
+
+            <div>
+                <div class="skeleton-box skeleton-title"></div>
+                <div class="skeleton-box skeleton-artist"></div>
+            </div>
+        `;
+
+        TrendContainer.appendChild(skeleton);
+    }
+}
+
+
+function showMusicSkeletons() {
+
+    container.innerHTML = "";
+
+    for (let i = 0; i < 5; i++) {
+
+        const skeleton = document.createElement("div");
+
+        skeleton.className = "music-card skeleton-card";
+
+        skeleton.innerHTML = `
+            <div class="skeleton-box skeleton-music-image"></div>
+
+            <div>
+                <div class="skeleton-box skeleton-music-title"></div>
+                <div class="skeleton-box skeleton-music-artist"></div>
+            </div>
+
+            <div class="skeleton-box"
+                 style="width:20px;height:20px;border-radius:50%;">
+            </div>
+        `;
+
+        container.appendChild(skeleton);
+    }
+}
 
 

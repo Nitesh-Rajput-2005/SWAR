@@ -429,3 +429,69 @@
  ::-webkit-scrollbar-thumb:hover {
      background: rgba(255, 255, 255, 0.5);
  }
+
+ /* =========================
+   SKELETON LOADING
+========================= */
+
+.skeleton-card {
+    animation: skeletonPulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-box {
+    background: #939191;
+    border-radius: 8px;
+}
+
+.skeleton-trend-image {
+    width: 99%;
+    height: 99%;
+    border-radius: 8px;
+}
+
+.skeleton-title {
+    width: 75%;
+    height: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.skeleton-artist {
+    width: 55%;
+    height: 13px;
+    margin-top: 8px;
+    border-radius: 5px;
+}
+
+.skeleton-music-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.skeleton-music-title {
+    width: 100px;
+    height: 12px;
+    border-radius: 5px;
+}
+
+.skeleton-music-artist {
+    width: 70px;
+    height: 10px;
+    margin-top: 7px;
+    border-radius: 5px;
+}
+
+@keyframes skeletonPulse {
+    0% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.45;
+    }
+}
